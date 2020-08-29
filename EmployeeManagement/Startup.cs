@@ -45,9 +45,9 @@ namespace EmployeeManagement
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
             })
             .AddEntityFrameworkStores<AppDbContext>()
-            .AddDefaultTokenProviders()
-            .AddTokenProvider<CustomEmailConfirmationTokenProvider
-                <ApplicationUser>>("CustomEmailConfirmation");
+            .AddDefaultTokenProviders();
+            //.AddTokenProvider<CustomEmailConfirmationTokenProvider
+            //    <ApplicationUser>>("CustomEmailConfirmation");
 
             services.Configure<DataProtectionTokenProviderOptions>(o =>
                         o.TokenLifespan = TimeSpan.FromHours(5));
@@ -57,25 +57,26 @@ namespace EmployeeManagement
 
             services.AddMvc(options =>
             {
+                options.EnableEndpointRouting = false;
                 var policy = new AuthorizationPolicyBuilder()
                                 .RequireAuthenticatedUser()
                                 .Build();
                 options.Filters.Add(new AuthorizeFilter(policy));
             }).AddXmlSerializerFormatters();
 
-            services.AddAuthentication()
-                .AddGoogle(options =>
-                {
-                    options.ClientId = "443892072779-3n0ljac2jnar4kmnnlkn74h4ic1tdq54.apps.googleusercontent.com";
-                    options.ClientSecret = "7C6TvX2SWEodUuXd3EpsoO1R";
-                })
-                .AddFacebook(options =>
-                {
-                    options.AppId = "2316662895109472";
-                    options.AppSecret = "e25c1b8d4145034ed426d7a05efe1481";
-                });
+			//services.AddAuthentication()
+			//    .AddGoogle(options =>
+			//    {
+			//        options.ClientId = "443892072779-3n0ljac2jnar4kmnnlkn74h4ic1tdq54.apps.googleusercontent.com";
+			//        options.ClientSecret = "7C6TvX2SWEodUuXd3EpsoO1R";
+			//    })
+			//    .AddFacebook(options =>
+			//    {
+			//        options.AppId = "2316662895109472";
+			//        options.AppSecret = "e25c1b8d4145034ed426d7a05efe1481";
+			//    });
 
-            services.ConfigureApplicationCookie(options =>
+			services.ConfigureApplicationCookie(options =>
             {
                 options.AccessDeniedPath = new PathString("/Administration/AccessDenied");
             });

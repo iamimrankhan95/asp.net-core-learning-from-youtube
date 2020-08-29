@@ -8,12 +8,11 @@ using System.Threading.Tasks;
 
 namespace EmployeeManagement.Security
 {
-    public class CustomEmailConfirmationTokenProvider<TUser>
-        : DataProtectorTokenProvider<TUser> where TUser : class
-    {
-        public CustomEmailConfirmationTokenProvider(IDataProtectionProvider dataProtectionProvider,
-                                        IOptions<CustomEmailConfirmationTokenProviderOptions> options)
-            : base(dataProtectionProvider, options)
-        { }
-    }
+    //public class CustomEmailConfirmationTokenProvider<TUser> : DataProtectorTokenProvider<TUser> where TUser : class
+    //{
+    //    public CustomEmailConfirmationTokenProvider(IDataProtectionProvider dataProtectionProvider,
+    //                                                IOptions<CustomEmailConfirmationTokenProviderOptions> options)
+    //        : base(dataProtectionProvider, options)
+    //    { }
+    //}
 }
